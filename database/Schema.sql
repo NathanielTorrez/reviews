@@ -1,9 +1,10 @@
+DROP DATABASE IF EXISTS review;
 CREATE DATABASE review;
 
 USE review;
 
-CREATE TABLE users (ID int PRIMARY KEY AUTO_INCREMENT, name Varchar(30), photo_url Varchar(60) );
-CREATE TABLE reviews (ID int PRIMARY KEY AUTO_INCREMENT, review_text Varchar(300) user int, home_id int );
-CREATE TABLE  ratings (ID int PRIMARY KEY AUTO_INCREMENT, cleanliness int, accuracy int, communication int, _checkin int, _location int, _value int, rating int, home_id int);
-
+CREATE TABLE users (ID int PRIMARY KEY AUTO_INCREMENT, _name Varchar(30), photo_url Varchar(60));
+CREATE TABLE reviews (ID int PRIMARY KEY AUTO_INCREMENT, review_text Varchar(1000), user int, home_id int, _date  Varchar(25), host_response_id int );
+CREATE TABLE host (ID int PRIMARY KEY AUTO_INCREMENT, response_text Varchar(300), _name int, home_id int, _date Varchar(25), reviewID int );
+CREATE TABLE  ratings (ID int PRIMARY KEY AUTO_INCREMENT, cleanliness DECIMAL(3,2), accuracy DECIMAL(3,2), communication DECIMAL(3,2), _checkin DECIMAL(3,2), _location DECIMAL(3,2), _value DECIMAL(3,2), rating DECIMAL(3,2), home_id int);
 

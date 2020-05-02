@@ -1,12 +1,19 @@
-let {login} = require('/config.js');
-let mySql = require('mySql');
+var login = require('./config.js');
+var mySql = require('mysql');
 
-let connection = mySql.createConnection(login);
+var connection = mySql.createConnection(login);
+
 connection.connect((err) => {
   if (err) {
     console.log(err)
-    return
-  } else {
-    console.log('connected as id ' + connection.threadId);
+    return;
   }
+    console.log('connected');
+    return
 });
+
+
+
+module.exports = connection;
+
+//brew install aws cli
