@@ -5,11 +5,11 @@ var connection = mySql.createConnection(login);
 
 connection.connect((err) => {
   if (err) {
-    console.log(err)
+    console.log(err);
     return;
   }
-    console.log('connected');
-    return
+  console.log('connected');
+  return;
 });
 
 
