@@ -11,7 +11,23 @@ app.use(bodyParser.json());
 app.use(express.static('client/dist'));
 
 app.get('/reviews', (req, res) => {
-  db.query('SELECT * FROM reviews;', (err, results) => {
+  const { id } = req.query;
+
+  db.query(`SELECT * FROM reviews WHERE home_id = ${id};`, (err, results) => {
+    if (err) {
+      res.status(404);
+      res.end();
+    } else {
+      res.status(200);
+      res.send(results);
+    }
+  });
+});
+
+app.get('/ratings', (req, res) => {
+  const { id } = req.query;
+
+  db.query(`SELECT * FROM ratings WHERE home_id = ${id};`, (err, results) => {
     if (err) {
       res.status(404);
       res.end();

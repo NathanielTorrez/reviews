@@ -77,7 +77,7 @@ const seedReviews = () => {
   const years = [];
 
   for (let i = 2000; i < 2020; i += 1) {
-    const year = ' ' + i + '';
+    const year = ` ${i}`;
     years.push(year);
   }
 
@@ -90,7 +90,7 @@ const seedReviews = () => {
 
     const user = Math.floor(Math.random() * 101);
     const homeID = (Math.floor(Math.random() * (100 - 1 + 1)) + 1);
-    const review = 'The ' + noun + ' was ' + adverb + ' ' + adjective + '. I ' + verb + ' this, I will ' + returning + ' .';
+    const review = `The ${noun} was ${adverb} ${adjective}. I ${verb} this, I will ${returning} .`;
     const hostResponse = Math.floor(Math.random() * 101);
     const date = months[Math.floor(Math.random() * 12)] + years[Math.floor(Math.random() * 20)];
 
@@ -111,7 +111,7 @@ const seedHost = () => {
   const years = [];
 
   for (let i = 2000; i < 2020; i += 1) {
-    const year = ' ' + i + '';
+    const year = ` ${i}`;
     years.push(year);
   }
 
