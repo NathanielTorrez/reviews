@@ -1,4 +1,5 @@
 const db = require('./index.js');
+const seedPhotos = require('../aws/photos.js');
 
 const seedUsers = () => {
   const names = [
@@ -34,6 +35,7 @@ const seedUsers = () => {
       }
     });
   }
+  seedPhotos();
 };
 
 const seedRatings = () => {
