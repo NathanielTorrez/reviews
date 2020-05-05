@@ -6,7 +6,7 @@ import ReviewEntry from './ReviewEntry.jsx';
 const Reviews = ({ reviews }) => (
   <div>
     {reviews.map((review) => (
-      <ReviewEntry key={review.ID} reviewText={review.review_text} date={review.fullDate} />
+      <ReviewEntry key={`${review.ID} + ${review.host_response_id}`} reviewText={review.review_text} date={review.fullDate} />
     ))}
   </div>
 );
