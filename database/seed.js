@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const db = require('./index.js');
 const seedPhotos = require('../aws/photos.js');
 
@@ -90,7 +91,10 @@ const seedReviews = () => {
     const verb = verbs[Math.floor(Math.random() * 5)];
     const returning = returnings[Math.floor(Math.random() * 4)];
 
-    const user = Math.floor(Math.random() * 101);
+    let user = Math.floor(Math.random() * 101);
+    if (user < 1) {
+      user = 1;
+    }
     const homeID = (Math.floor(Math.random() * (100 - 1 + 1)) + 1);
     const review = `The ${noun} was ${adverb} ${adjective}. I ${verb} this, I will ${returning} .`;
     const hostResponse = Math.floor(Math.random() * 101);

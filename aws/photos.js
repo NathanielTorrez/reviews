@@ -18,16 +18,14 @@ const seedPhotoUrl = () => {
       const keys = [];
 
       for (let i = 0; i < objects.length; i += 1) {
-
         const presignedGETURL = s3.getSignedUrl('getObject', {
           Bucket: 'photo-bucket-fex',
           Key: `${objects[i].Key}`,
           Expires: 100,
         });
-        keys.push(presignedGETURL)
+        keys.push(presignedGETURL);
       }
       for (let j = 1; j < 101; j += 1) {
-
         const randomIndex = Math.floor(Math.random() * keys.length);
         const url = keys[randomIndex];
         db.query(`UPDATE users SET photo_url="${url}" WHERE ID=${j};`, (err) => {

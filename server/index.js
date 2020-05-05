@@ -13,7 +13,7 @@ app.use(express.static('client/dist'));
 app.get('/reviews', (req, res) => {
   const { id } = req.query;
 
-  db.query(`SELECT * FROM reviews WHERE home_id = ${id} ORDER BY fullDate DESC;`, (err, results) => {
+  db.query(`select * from reviews inner join users on users.ID = reviews.user where home_id=${id} order by fullDate desc;`, (err, results) => {
     if (err) {
       res.status(404);
       res.end();
@@ -85,5 +85,16 @@ app.get('/ratings', (req, res) => {
     }
   });
 });
+
+app.get('/test',(req,res) => {
+  db.query('select * from reviews inner join users on users.ID = reviews.user where home_id=1 order by fullDate desc;', (err, results) => {
+    if(err) {
+      res.status(404)
+    } else {
+      res.status(200)
+      res.send(results)
+    }
+  })
+})
 
 app.listen(port, () => { console.log(`listening on port ${port}`); });
