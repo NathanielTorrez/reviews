@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-//  const aws = require('aws-sdk');
 const express = require('express');
 
 const app = express();
@@ -86,9 +85,5 @@ app.get('/ratings', (req, res) => {
     }
   });
 });
-
-app.get('/api/pictures', () => {
-});
-
 
 app.listen(port, () => { console.log(`listening on port ${port}`); });
