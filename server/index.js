@@ -13,7 +13,7 @@ app.use(express.static('client/dist'));
 app.get('/reviews', (req, res) => {
   const { id } = req.query;
 
-  db.query(`SELECT * FROM reviews WHERE home_id = ${id};`, (err, results) => {
+  db.query(`SELECT * FROM reviews WHERE home_id = ${id} ORDER BY fullDate DESC;`, (err, results) => {
     if (err) {
       res.status(404);
       res.end();

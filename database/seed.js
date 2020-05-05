@@ -73,11 +73,11 @@ const seedReviews = () => {
   const adjectives = ['beautiful', 'peaceful', 'cozy', 'fun', 'little', 'huge', 'gorgeous', 'terrible', 'loud', 'smelly'];
   const adverbs = ['very much', 'sorta', 'kinda', 'very', 'very much'];
   const returnings = ['be coming back', 'NOT be returning', 'be making this my go to place', 'be staying here again because of that'];
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'October', 'December'];
+  const months = ['-01-01', '-02-01', '-03-01', '-04-01', '-05-01', '-06-01', '-07-01', '-08-01', '-09-01', '-10-01', '-11-01', '-12-01'];
   const years = [];
 
-  for (let i = 2000; i < 2020; i += 1) {
-    const year = ` ${i}`;
+  for (let i = 2010; i < 2020; i += 1) {
+    const year = `${i}`;
     years.push(year);
   }
 
@@ -92,10 +92,10 @@ const seedReviews = () => {
     const homeID = (Math.floor(Math.random() * (100 - 1 + 1)) + 1);
     const review = `The ${noun} was ${adverb} ${adjective}. I ${verb} this, I will ${returning} .`;
     const hostResponse = Math.floor(Math.random() * 101);
-    const date = months[Math.floor(Math.random() * 12)] + years[Math.floor(Math.random() * 20)];
+    const date = years[Math.floor(Math.random() * 10)] + months[Math.floor(Math.random() * 12)];
 
 
-    db.query(`INSERT INTO reviews(review_text , user, home_id, _date, host_response_id ) VALUES("${review}", ${user}, ${homeID},"${date}", ${hostResponse});`, (err) => {
+    db.query(`INSERT INTO reviews(review_text , user, home_id, fullDate, host_response_id ) VALUES("${review}", ${user}, ${homeID},"${date}", ${hostResponse});`, (err) => {
       if (err) {
         console.log(err);
       } else {
@@ -107,22 +107,22 @@ const seedReviews = () => {
 
 const seedHost = () => {
   const hostResponse = ['Thanks so much for leaving a review', 'I will take this feedback into account', 'Regardless of the feedback I appreciate it thank you', 'Awesome have a nice day'];
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'October', 'December'];
+  const months = ['-01-01', '-02-01', '-03-01', '-04-01', '-05-01', '-06-01', '-07-01', '-08-01', '-09-01', '-10-01', '-11-01', '-12-01'];
   const years = [];
 
-  for (let i = 2000; i < 2020; i += 1) {
-    const year = ` ${i}`;
+  for (let i = 2010; i < 2020; i += 1) {
+    const year = `${i}`;
     years.push(year);
   }
 
   for (let i = 0; i < 300; i += 1) {
     const response = hostResponse[Math.floor(Math.random() * 4)];
-    const date = months[Math.floor(Math.random() * 12)] + years[Math.floor(Math.random() * 20)];
+    const date = years[Math.floor(Math.random() * 10)] + months[Math.floor(Math.random() * 12)];
     const homeID = (Math.floor(Math.random() * (100 - 1 + 1)) + 1);
     const name = Math.floor(Math.random() * 101);
     const reviewID = Math.floor(Math.random() * 1500);
 
-    db.query(`INSERT INTO host(response_text, _name , home_id , _date ,reviewID) VALUES("${response}", ${name}, ${homeID}, "${date}", ${reviewID});`, (err) => {
+    db.query(`INSERT INTO host(response_text, _name , home_id , fullDate ,reviewID) VALUES("${response}", ${name}, ${homeID}, "${date}", ${reviewID});`, (err) => {
       if (err) {
         console.log(err);
       } else {

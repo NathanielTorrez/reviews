@@ -1,20 +1,17 @@
+/* eslint-disable import/extensions */
 import React from 'react';
+import PropTypes from 'prop-types';
+import ReviewEntry from './ReviewEntry.jsx';
 
-class Reviews extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
-  }
-
-  render() {
-    return (
-      <div>
-        made it to Reviews
-      </div>
-    );
-  }
-}
+const Reviews = ({ reviews }) => (
+  <div>
+    {reviews.map((review) => (
+      <ReviewEntry key={review.ID} reviewText={review.review_text} date={review.fullDate} />
+    ))}
+  </div>
+);
+Reviews.propTypes = {
+  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default Reviews;

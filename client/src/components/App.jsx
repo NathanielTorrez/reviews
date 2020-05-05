@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      reviews: [],
+      reviews: null,
     };
   }
 
@@ -20,6 +20,7 @@ class App extends React.Component {
         this.setState({
           reviews: results.data,
         });
+        console.log(results.data);
       })
       .catch((err) => {
         console.log(err);
@@ -29,10 +30,19 @@ class App extends React.Component {
   render() {
     const { ratings } = this.state;
     const { reviews } = this.state;
+    let loading;
+
+    if (reviews === null) {
+      loading = (
+        <div> </div>
+      );
+    } else {
+      loading = <Reviews reviews={reviews} />;
+    }
     return (
       <div>
+        <div>{loading}</div>
         <Ratings ratings={ratings} />
-        <Reviews reviews={reviews} />
       </div>
     );
   }
