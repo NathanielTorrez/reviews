@@ -1,41 +1,40 @@
 import React from 'react';
 import axios from 'axios';
+// eslint-disable-next-line import/extensions
+import Ratings from './Ratings.jsx';
+// eslint-disable-next-line import/extensions
+import Reviews from './Reviews.jsx';
 
 class App extends React.Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
       reviews: [],
-      ratings: []
-    }
+    };
   }
 
-componentDidMount() {
-  axios.get('http://localhost:3003/reviews?id=1')
-  .then((results) => {
-    this.setState({
-      reviews: results.data
-    })
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-  axios.get('http://localhost:3003/ratings?id=1')
-  .then((results) => {
-    console.log(results.data)
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-}
+  componentDidMount() {
+    axios.get('http://localhost:3003/reviews?id=1')
+      .then((results) => {
+        this.setState({
+          reviews: results.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
+    const { ratings } = this.state;
+    const { reviews } = this.state;
     return (
-    <div>hello dad</div>
-    )
+      <div>
+        <Ratings ratings={ratings} />
+        <Reviews reviews={reviews} />
+      </div>
+    );
   }
 }
-
 export default App;

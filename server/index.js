@@ -1,4 +1,4 @@
-const aws = require('aws-sdk');
+//const aws = require('aws-sdk');
 const express = require('express');
 
 const app = express();
@@ -38,9 +38,7 @@ app.get('/ratings', (req, res) => {
   });
 });
 
-app.get('/api/pictures', (req, res) => {
-  console.log(req.body);
-  console.log(res);
+app.get('/api/pictures', () => {
 });
 
 
