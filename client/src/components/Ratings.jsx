@@ -11,16 +11,6 @@ class Ratings extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3003/ratings?id=1')
-      .then((results) => {
-        const { data } = results;
-        this.setState({
-          ratings: data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   componentDidUpdate() {
