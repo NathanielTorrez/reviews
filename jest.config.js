@@ -6,9 +6,9 @@ module.exports = {
   setupFilesAfterEnv: ['jest-enzyme'],
   testEnvironment: 'enzyme',
   testEnvironmentOptions: {
-    enzymeAdapter: 'react16'
+    enzymeAdapter: 'react16',
   },
   transform: {
-    '^.+\\.jsx$': 'babel-jest'
-  }
+    '^.+\\.jsx$': 'babel-jest',
+  },
 };
