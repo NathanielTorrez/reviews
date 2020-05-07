@@ -45,7 +45,7 @@ border-bottom:0.5px solid #dfe0df;
 `;
 
 const Star = styled.div`
-color:teal;
+color:rgb(0, 132, 137);
 font-size:0.5em;
 
 `;
@@ -103,7 +103,7 @@ class App extends React.Component {
         this.setState({
           loading: false,
         });
-        //console.log(results.data);
+        console.log(results.data);
       })
       .catch((err) => {
         console.log(err);
@@ -119,7 +119,6 @@ class App extends React.Component {
   }
 
 
-
   render() {
     const { ratings } = this.state;
     const { reviews } = this.state;
@@ -132,13 +131,16 @@ class App extends React.Component {
     let overallRating;
     let totalReviews;
     let ReviewComp;
+    let RatingComp;
 
     if (loading) {
       overallRating = <div />;
       totalReviews = <div />;
       ReviewComp = <div />;
+      RatingComp = <div />;
     } else {
       ReviewComp = <Reviews reviews={currentReview} />;
+      RatingComp = <Ratings rating={ratings[0]} />;
       overallRating = ratings[0].rating;
       totalReviews = reviews.length;
     }
@@ -156,6 +158,7 @@ class App extends React.Component {
             </TotalReviews>
           </BottomHeader>
         </Header>
+        {RatingComp}
         <BodyContainer>{ReviewComp}</BodyContainer>
         <Pagination totalReviews={totalReviews} reviewsPerPage={reviewsPerPage} Paginate={this.paginate} />
       </ComponentContainer>

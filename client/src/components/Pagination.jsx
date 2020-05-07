@@ -26,6 +26,10 @@ border-radius:12px;
 &:hover {
   background-color:teal;
 }
+&:focus {
+  outline:0;
+}
+
 `;
 
 const Number = styled.div`
