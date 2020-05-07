@@ -79,18 +79,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3003/reviews?id=1')
+    axios.get('http://localhost:3003/reviews?id=2')
       .then((results) => {
         this.setState({
           reviews: results.data,
         });
         console.log(results.data);
-
       })
       .catch((err) => {
         console.log(err);
       });
-      axios.get('http://localhost:3003/ratings?id=1')
+
+      axios.get('http://localhost:3003/ratings?id=2')
       .then((results) => {
         this.setState({
           ratings: results.data,

@@ -11,13 +11,19 @@ height:80px;
 const ProfilePicture = styled.img`
   height:25px;
   width:25px;
-  src: ${props => props.image};
+  border-radius:50%;
+  padding-bottom:5px;
+  padding-top:2px;
+ `;
+
+const Date = styled.div`
+ padding-bottom:5px;
  `;
 const ReviewEntry = ({ reviewText, date, name, image }) => (
   <ReviewContainer>
-    <ProfilePicture/>
+    <ProfilePicture src={image} ></ProfilePicture>
+    <Date>{date}</Date>
     <div>{reviewText}</div>
-    <div>{date}</div>
   </ReviewContainer>
 );
 
