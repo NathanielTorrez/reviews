@@ -21,7 +21,7 @@ const seedPhotoUrl = () => {
         const presignedGETURL = s3.getSignedUrl('getObject', {
           Bucket: 'photo-bucket-fex',
           Key: `${objects[i].Key}`,
-          Expires: 100,
+          Expires: 200,
         });
         keys.push(presignedGETURL);
       }

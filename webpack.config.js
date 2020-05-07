@@ -1,4 +1,6 @@
 /* eslint-disable no-path-concat */
+const path = require('path');
+
 module.exports = {
   entry: `${__dirname}/client/src/index.jsx`,
   module: {
@@ -21,5 +23,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
+    alias: { react: path.resolve('./node_modules/react') }
   },
 };
