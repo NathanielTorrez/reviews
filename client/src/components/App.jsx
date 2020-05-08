@@ -15,8 +15,8 @@ const ComponentContainer = styled.div`
   color: #484848;
   background-color:#fff;
   padding-left:150px;
-  width:400px;
-  height:1405px;
+  width:648px;
+  height:2285px;
   font-family: 'Montserrat', sans-serif;
 `;
 
@@ -25,8 +25,8 @@ marign-bottom:12px;
 `;
 
 const Title = styled.h1`
-font-size:0.9em;
-font-weight:650;
+font-size:24px;
+font-weight:700;
 color: rgb(72, 72, 72);
 box-sizing: border-box;
 marign-bottom:8px;
@@ -37,7 +37,7 @@ border-top:0.5px solid #dfe0df;
 `;
 
 const BodyContainer = styled.div`
-font-size:0.5em;
+font-size:14px;
 `;
 const BottomHeader = styled.div`
 display:flex;
@@ -47,12 +47,12 @@ border-bottom:0.5px solid #dfe0df;
 
 const Star = styled.div`
 color:rgb(0, 132, 137);
-font-size:0.5em;
+font-size:14px;
 
 `;
 const HeaderRating = styled.div`
-font-size: 0.6em;
-font-weight:500;
+font-size: 18px;
+font-weight:800;
 color:black;
 
 margin-left:5px;
@@ -60,14 +60,22 @@ padding-right:5px;
 padding-bottom:5px;
 border-right:0.5px solid #dfe0df;
 `;
-const TotalReviews = styled.div`
-font-size: 0.6em;
-font-weight:500;
+const TotalReviewsNumber = styled.div`
+font-size: 18px;
+font-weight:800;
 color:black;
 
 margin-left:5px;
-padding-right:200px;
+padding-right:5px;
 padding-bottom:5px;
+`;
+const TotalReviews = styled.div`
+font-size:14px;
+font-weight:500;
+color:black;
+margin-left:5px;
+padding-right:200px;
+margin-top:3px;
 `;
 
 class App extends React.Component {
@@ -155,11 +163,8 @@ class App extends React.Component {
           <BottomHeader>
             <Star>&#9733;</Star>
             <HeaderRating>{overallRating}</HeaderRating>
-            <TotalReviews>
-              {totalReviews}
-              {' '}
-              Reviews
-            </TotalReviews>
+            <TotalReviewsNumber>{totalReviews}</TotalReviewsNumber>
+            <TotalReviews> Reviews</TotalReviews>
             <Search />
           </BottomHeader>
         </Header>

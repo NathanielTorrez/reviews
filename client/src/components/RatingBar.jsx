@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const BarContainer = styled.div`
  display:block;
- height:1px;
- width:40px;
+ height:3px;
+ width:95px;
  margin-right:12px;
  margin-top:3px;
  border:1px solid black;

@@ -5,8 +5,9 @@ import RatingBar from './RatingBar.jsx';
 const RatingsConatainer = styled.div`
 display:flex;
 flex-flow:column wrap;
-height:75px;
-font-size:1em;
+justify-content:space-between;
+height:95px;
+font-size:16px;
 `;
 const RatingItem = styled.div`
 display:flex;
@@ -14,21 +15,19 @@ flex-direction:row;
 justify-content:space-between;
 padding-top:5px;
 height:20px;
-width:175px;
-font-size:1em;
+width:324px;
 `;
 const RatingName = styled.div`
-font-size:0.5em;
-width:75px;
+width:154px;
 height:19px;
 `;
 const RatingScore = styled.div`
-width:75px;
+width:154px;
 height:20px;
 display:flex;
 flex-direction:row;
-font-size:0.5em;
-font-weight:bold;
+font-size:16px;
+font-weight:600;
 `;
 
 const Ratings = ({ rating }) => (
