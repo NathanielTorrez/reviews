@@ -7,6 +7,7 @@ import Ratings from './Ratings.jsx';
 // eslint-disable-next-line import/extensions
 import Reviews from './Reviews.jsx';
 import Pagination from './Pagination.jsx';
+import Search from './Search.jsx'
 
 
 const ComponentContainer = styled.div`
@@ -79,6 +80,9 @@ class App extends React.Component {
       loading:true,
       currentPage:1,
       reviewsPerPage:10,
+      searchTerm:'',
+      searched:false,
+      searchResults:[],
     };
     this.paginate = this.paginate.bind(this);
   }
@@ -156,6 +160,7 @@ class App extends React.Component {
               {' '}
               Reviews
             </TotalReviews>
+            <Search />
           </BottomHeader>
         </Header>
         {RatingComp}
