@@ -48,17 +48,19 @@ const Date = styled.div`
   padding-bottom:5px;
   font-size:0.8em;
  `;
-const ReviewEntry = ({ reviewText, date, name, image }) => (
+const ReviewEntry = ({
+  reviewText, date, name, image,
+}) => (
   <ReviewContainer>
     <UserContainer>
-    <ProfilePicture src={image} ></ProfilePicture>
-    <DetailsContainer>
-    <Name>{name}</Name>
-    <Date>{date}</Date>
-    </DetailsContainer>
+      <ProfilePicture src={image} />
+      <DetailsContainer>
+        <Name>{name}</Name>
+        <Date>{date}</Date>
+      </DetailsContainer>
     </UserContainer>
     <ReviewText>
-    {reviewText}
+      {reviewText}
     </ReviewText>
   </ReviewContainer>
 );
