@@ -1,3 +1,5 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
@@ -8,7 +10,7 @@ import Ratings from './Ratings.jsx';
 // eslint-disable-next-line import/extensions
 import Reviews from './Reviews.jsx';
 import Pagination from './Pagination.jsx';
-import Search from './Search.jsx'
+import Search from './Search.jsx';
 
 
 const ComponentContainer = styled.div`
@@ -86,14 +88,19 @@ class App extends React.Component {
     this.state = {
       reviews: [],
       ratings: [],
-      loading:true,
-      currentPage:1,
-      reviewsPerPage:10,
-      searchTerm:'',
-      searched:false,
-      searchResults:[],
+      loading: true,
+      currentPage: 1,
+      reviewsPerPage: 10,
+      searchTerm: '',
+      searched: false,
+      searchResults: [],
+      searchButtonColor: '1px solid rgb(235, 235, 235)',
     };
     this.paginate = this.paginate.bind(this);
+    this.ChangeBorder = this.ChangeBorder.bind(this);
+    this.ChangeBorderOnBodyClick = this.ChangeBorderOnBodyClick.bind(this);
+    this.SearchClick = this.SearchClick.bind(this);
+    this.SearchGetRequest = this.SearchGetRequest.bind(this);
   }
 
   componentDidMount() {
@@ -133,17 +140,72 @@ class App extends React.Component {
     scroll.scrollToTop();
   }
 
+  ChangeBorder(e) {
+    e.preventDefault();
+    const { searchButtonColor } = this.state;
+    if (searchButtonColor === '1px solid rgb(235, 235, 235)') {
+      this.setState({
+        searchButtonColor: '1px solid teal',
+      });
+    } else {
+      this.setState({
+        searchButtonColor: '1px solid rgb(235, 235, 235)',
+      });
+    }
+  }
 
+  ChangeBorderOnBodyClick(e) {
+    e.preventDefault();
+    this.setState({
+      searchButtonColor: '1px solid rgb(235, 235, 235)',
+    });
+  }
+
+  SearchClick(e) {
+    e.preventDefault();
+    const term = e.target.value;
+    const { searchTerm } = this.state;
+    const { searched } = this.state;
+    if (term.length < searchTerm.length) {
+      this.setState({
+        searched: false,
+        searchTerm: term,
+      });
+    } else {
+      this.setState({
+        searchTerm: term,
+      });
+    }
+}
+
+  SearchGetRequest(e) {
+    e.preventDefault();
+    axios.get(`http://localhost:3003/search?id=2&term=${this.state.searchTerm}`)
+      .then((results) => {
+        const { data } = results;
+        this.setState({
+          searchResults: data,
+          searched: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     const { ratings } = this.state;
     const { reviews } = this.state;
     const { loading } = this.state;
+    const { searched } = this.state;
     const { currentPage } = this.state;
+    const { searchResults } = this.state;
     const { reviewsPerPage } = this.state;
+    const { searchButtonColor } = this.state;
     const indexOfLastReview = currentPage * reviewsPerPage;
     const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
     const currentReview = reviews.slice(indexOfFirstReview, indexOfLastReview);
+    const currentSearchReview = searchResults.slice(indexOfFirstReview, indexOfLastReview);
     let overallRating;
     let totalReviews;
     let ReviewComp;
@@ -155,7 +217,11 @@ class App extends React.Component {
       ReviewComp = <div />;
       RatingComp = <div />;
     } else {
-      ReviewComp = <Reviews reviews={currentReview} />;
+      if (searched) {
+        ReviewComp = <Reviews reviews={currentSearchReview} />;
+      } else {
+        ReviewComp = <Reviews reviews={currentReview} />;
+      }
       RatingComp = <Ratings rating={ratings[0]} />;
       overallRating = ratings[0].rating;
       totalReviews = reviews.length;
@@ -163,19 +229,17 @@ class App extends React.Component {
     return (
       <ComponentContainer>
         <Header>
-          <a name="top">
           <Title>Reviews</Title>
-          </a>
           <BottomHeader>
             <Star>&#9733;</Star>
             <HeaderRating>{overallRating}</HeaderRating>
             <TotalReviewsNumber>{totalReviews}</TotalReviewsNumber>
             <TotalReviews> Reviews</TotalReviews>
-            <Search />
+            <Search color={searchButtonColor} ChangeBorder={this.ChangeBorder} SearchClick={this.SearchClick} searchRequest={this.SearchGetRequest} />
           </BottomHeader>
         </Header>
         {RatingComp}
-        <BodyContainer>{ReviewComp}</BodyContainer>
+        <BodyContainer onClick={this.ChangeBorderOnBodyClick}>{ReviewComp}</BodyContainer>
         <Pagination totalReviews={totalReviews} reviewsPerPage={reviewsPerPage} Paginate={this.paginate} />
       </ComponentContainer>
     );
