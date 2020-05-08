@@ -87,7 +87,7 @@ const seedReviews = () => {
   for (let i = 0; i < 2000; i += 1) {
     const noun = nouns[Math.floor(Math.random() * 7)];
     const adjective = adjectives[Math.floor(Math.random() * 10)];
-    const adverb = adverbs[Math.floor(Math.random() * 6)];
+    const adverb = adverbs[Math.floor(Math.random() * 5)];
     const verb = verbs[Math.floor(Math.random() * 5)];
     const returning = returnings[Math.floor(Math.random() * 4)];
 

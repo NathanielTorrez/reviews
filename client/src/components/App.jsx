@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Ratings from './Ratings.jsx';
 // eslint-disable-next-line import/extensions
 import Reviews from './Reviews.jsx';
+import Pagination from './Pagination.jsx';
 
 
 const ComponentContainer = styled.div`
@@ -15,6 +16,7 @@ const ComponentContainer = styled.div`
   padding-left:150px;
   width:400px;
   height:1405px;
+  font-family: 'Montserrat', sans-serif;
 `;
 
 const Header = styled.div`
@@ -43,7 +45,7 @@ border-bottom:0.5px solid #dfe0df;
 `;
 
 const Star = styled.div`
-color:teal;
+color:rgb(0, 132, 137);
 font-size:0.5em;
 
 `;
@@ -68,14 +70,17 @@ padding-bottom:5px;
 `;
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      reviews: null,
-      ratings: null,
+      reviews: [],
+      ratings: [],
+      loading:true,
+      currentPage:1,
+      reviewsPerPage:10,
     };
+    this.paginate = this.paginate.bind(this);
   }
 
   componentDidMount() {
@@ -84,48 +89,60 @@ class App extends React.Component {
         this.setState({
           reviews: results.data,
         });
-        console.log(results.data);
+        //console.log(results.data);
       })
       .catch((err) => {
         console.log(err);
       });
 
-      axios.get('http://localhost:3003/ratings?id=2')
+    axios.get('http://localhost:3003/ratings?id=2')
       .then((results) => {
         this.setState({
           ratings: results.data,
         });
-        console.log(results.data)
+        this.setState({
+          loading: false,
+        });
+        console.log(results.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
+  paginate(e) {
+    e.preventDefault();
+    const page = e.target.innerHTML;
+    this.setState({
+      currentPage: page
+    })
+  }
+
 
   render() {
     const { ratings } = this.state;
     const { reviews } = this.state;
-    let loading;
+    const { loading } = this.state;
+    const { currentPage } = this.state;
+    const { reviewsPerPage } = this.state;
+    const indexOfLastReview = currentPage * reviewsPerPage;
+    const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+    const currentReview = reviews.slice(indexOfFirstReview, indexOfLastReview);
     let overallRating;
     let totalReviews;
+    let ReviewComp;
+    let RatingComp;
 
-    if (ratings === null) {
-      overallRating = <div></div>;
+    if (loading) {
+      overallRating = <div />;
+      totalReviews = <div />;
+      ReviewComp = <div />;
+      RatingComp = <div />;
     } else {
+      ReviewComp = <Reviews reviews={currentReview} />;
+      RatingComp = <Ratings rating={ratings[0]} />;
       overallRating = ratings[0].rating;
-    }
-    if (reviews === null) {
-      loading = (
-        <div> </div>
-      );
-    } else {
-      loading = <Reviews reviews={reviews} />;
-    }
-    if (reviews) {
       totalReviews = reviews.length;
-    } else {
-      totalReviews = <div></div>;
     }
     return (
       <ComponentContainer>
@@ -134,10 +151,16 @@ class App extends React.Component {
           <BottomHeader>
             <Star>&#9733;</Star>
             <HeaderRating>{overallRating}</HeaderRating>
-            <TotalReviews>{totalReviews} Reviews</TotalReviews>
+            <TotalReviews>
+              {totalReviews}
+              {' '}
+              Reviews
+            </TotalReviews>
           </BottomHeader>
         </Header>
-        <BodyContainer>{loading}</BodyContainer>
+        {RatingComp}
+        <BodyContainer>{ReviewComp}</BodyContainer>
+        <Pagination totalReviews={totalReviews} reviewsPerPage={reviewsPerPage} Paginate={this.paginate} />
       </ComponentContainer>
     );
   }
