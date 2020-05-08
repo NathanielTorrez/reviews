@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import * as Scroll from 'react-scroll';
 // eslint-disable-next-line import/extensions
 import Ratings from './Ratings.jsx';
 // eslint-disable-next-line import/extensions
@@ -126,9 +127,12 @@ class App extends React.Component {
     e.preventDefault();
     const page = e.target.innerHTML;
     this.setState({
-      currentPage: page
-    })
+      currentPage: page,
+    });
+    const scroll = Scroll.animateScroll;
+    scroll.scrollToTop();
   }
+
 
 
   render() {
