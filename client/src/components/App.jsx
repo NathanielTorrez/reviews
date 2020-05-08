@@ -159,7 +159,9 @@ class App extends React.Component {
     return (
       <ComponentContainer>
         <Header>
+          <a name="top">
           <Title>Reviews</Title>
+          </a>
           <BottomHeader>
             <Star>&#9733;</Star>
             <HeaderRating>{overallRating}</HeaderRating>
