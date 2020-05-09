@@ -11,6 +11,7 @@ import Ratings from './Ratings.jsx';
 import Reviews from './Reviews.jsx';
 import Pagination from './Pagination.jsx';
 import Search from './Search.jsx';
+import SearchedRatingsReplacement from './SearchedRatingsReplacement.jsx';
 
 
 const ComponentContainer = styled.div`
@@ -96,11 +97,12 @@ class App extends React.Component {
       searchResults: [],
       searchButtonColor: '1px solid rgb(235, 235, 235)',
     };
+    this.Reset = this.Reset.bind(this);
     this.paginate = this.paginate.bind(this);
-    this.ChangeBorder = this.ChangeBorder.bind(this);
-    this.ChangeBorderOnBodyClick = this.ChangeBorderOnBodyClick.bind(this);
     this.SearchClick = this.SearchClick.bind(this);
+    this.ChangeBorder = this.ChangeBorder.bind(this);
     this.SearchGetRequest = this.SearchGetRequest.bind(this);
+    this.ChangeBorderOnBodyClick = this.ChangeBorderOnBodyClick.bind(this);
   }
 
   componentDidMount() {
@@ -109,7 +111,6 @@ class App extends React.Component {
         this.setState({
           reviews: results.data,
         });
-        //console.log(results.data);
       })
       .catch((err) => {
         console.log(err);
@@ -193,11 +194,19 @@ class App extends React.Component {
       });
   }
 
+  Reset(e) {
+    e.preventDefault();
+    this.setState({
+      searched: false,
+    });
+  }
+
   render() {
     const { ratings } = this.state;
     const { reviews } = this.state;
     const { loading } = this.state;
     const { searched } = this.state;
+    const { searchTerm } = this.state;
     const { currentPage } = this.state;
     const { searchResults } = this.state;
     const { reviewsPerPage } = this.state;
@@ -219,12 +228,16 @@ class App extends React.Component {
     } else {
       if (searched) {
         ReviewComp = <Reviews reviews={currentSearchReview} />;
+        RatingComp = <SearchedRatingsReplacement total={searchResults.length} term={searchTerm} reset={this.Reset} />;
+        totalReviews = searchResults.length;
+
       } else {
         ReviewComp = <Reviews reviews={currentReview} />;
+        RatingComp = <Ratings searched={searched} rating={ratings[0]} />;
+        totalReviews = reviews.length;
+
       }
-      RatingComp = <Ratings rating={ratings[0]} />;
       overallRating = ratings[0].rating;
-      totalReviews = reviews.length;
     }
     return (
       <ComponentContainer>

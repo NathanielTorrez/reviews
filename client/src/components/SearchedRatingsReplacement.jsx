@@ -1,0 +1,50 @@
+import React from 'react';
+import styled from 'styled-components';
+
+const ReplacementContainer = styled.div`
+display:flex;
+flex-direction:row;
+align-items:center;
+height:40px;
+width:100%;
+border-bottom:0.5px solid #dfe0df;
+`;
+
+const InnerContainer = styled.div`
+display:flex;
+flex-direction:row;
+height:20px;
+width:100%;
+`;
+
+const Textcontainer = styled.div`
+font-size:14px;
+font-weight:400;
+width:50%;
+`;
+
+const ButtonContainer = styled.button`
+width:20%;
+color:teal;
+font-size:14px;
+font-weight:400;
+margin-left:30%;
+border:none;
+&:focus {
+  outline: 0;
+}
+`;
+
+const SearchedRatingsReplacement = ({term, total, reset }) => (
+  <ReplacementContainer>
+    <InnerContainer>
+      <Textcontainer>
+      {`${total} guests have mentioned “${term}”`}
+      </Textcontainer>
+      <ButtonContainer onClick={reset}>
+        back to reviews
+      </ButtonContainer>
+    </InnerContainer>
+  </ReplacementContainer>
+);
+export default SearchedRatingsReplacement;
