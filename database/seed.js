@@ -32,7 +32,7 @@ const seedUsers = () => {
       if (err) {
         console.log(err);
       } else {
-        console.log('success');
+       // console.log('success');
       }
     });
   }
@@ -64,7 +64,7 @@ const seedRatings = () => {
       if (err) {
         console.log(err);
       } else {
-        console.log('success');
+        //console.log('success');
       }
     });
   }
@@ -105,7 +105,7 @@ const seedReviews = () => {
       if (err) {
         console.log(err);
       } else {
-        console.log('success');
+       // console.log('success');
       }
     });
   }
@@ -132,7 +132,7 @@ const seedHost = () => {
       if (err) {
         console.log(err);
       } else {
-        console.log('success');
+        //console.log('success');
       }
     });
   }
