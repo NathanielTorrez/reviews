@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
 
 const BarContainer = styled.div`
  display:block;
- height:1px;
- width:40px;
+ height:3px;
+ width:95px;
  margin-right:12px;
  margin-top:3px;
  border:1px solid black;
@@ -16,13 +18,17 @@ const Filler = styled.div`
 border-radius:inherit;
 height:100%;
 background:rgb(0, 132, 137);
-width:${props => props.percent}%;
+width:${(props) => props.percent}%;
 `;
 
-const RatingBar = (props) => (
-
+const RatingBar = ({ percent }) => (
   <BarContainer>
-    <Filler percent={props.percent}/>
+    <Filler percent={percent} />
   </BarContainer>
-)
+);
+
+RatingBar.propTypes = {
+  percent: PropTypes.number.isRequired,
+};
+
 export default RatingBar;

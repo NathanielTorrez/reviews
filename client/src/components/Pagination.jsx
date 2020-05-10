@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 
 const PaginationContainer = styled.nav`
@@ -17,12 +18,12 @@ flex-direction:row;
 
 const PageButton = styled.button`
 display:block;
-height:15px;
-width:15px;
+height:32px;
+width:32px;
 margin: 0px;
 padding: 0px;
 border:none;
-border-radius:12px;
+border-radius:50%;
 &:hover {
   background-color:teal;
 }
@@ -34,6 +35,7 @@ border-radius:12px;
 
 const Number = styled.div`
 color:teal;
+font-size:14px;
 padding:2px;
 &:hover {
   color:white;
@@ -41,11 +43,10 @@ padding:2px;
 `;
 
 
-const Pagination = ({totalReviews, Paginate, reviewsPerPage}) => {
-
+const Pagination = ({ totalReviews, Paginate, reviewsPerPage }) => {
   const pageNumbers = [];
 
-  for ( let i = 1; i < Math.ceil(totalReviews / reviewsPerPage) + 1; i += 1) {
+  for (let i = 1; i < Math.ceil(totalReviews / reviewsPerPage) + 1; i += 1) {
     pageNumbers.push(i);
   }
 
@@ -53,9 +54,9 @@ const Pagination = ({totalReviews, Paginate, reviewsPerPage}) => {
     <PaginationContainer>
       <ListContainer>
         {pageNumbers.map((page) => (
-          <ListItem>
+          <ListItem key={page}>
             <PageButton type="button" onClick={Paginate}>
-              <Number>
+              <Number className={`page${page}`}>
                 {page}
               </Number>
             </PageButton>
@@ -63,6 +64,12 @@ const Pagination = ({totalReviews, Paginate, reviewsPerPage}) => {
         ))}
       </ListContainer>
     </PaginationContainer>
-  )
-}
+  );
+};
 export default Pagination;
+
+Pagination.propTypes = {
+  totalReviews: PropTypes.number.isRequired,
+  Paginate: PropTypes.func.isRequired,
+  reviewsPerPage: PropTypes.number.isRequired,
+};
