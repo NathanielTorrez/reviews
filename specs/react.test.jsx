@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import styled from 'styled-components';
@@ -31,18 +32,19 @@ const ReviewEntryTest = (review) => {
   return { wrapper };
 };
 
-const PaginationTest = (totalReviews, reviewsPerPage) => {
+const PaginationTest = (totalReviews, reviewsPerPage, Paginate) => {
   const wrapper = shallow(
     <Pagination
       totalReviews={totalReviews}
       reviewsPerPage={reviewsPerPage}
-    />
+      Paginate={Paginate}
+    />,
   );
   return { wrapper };
 };
 
-const SearchTest = (term) => {
-  const wrapper = shallow(<Ratings rating={RatingsData} />);
+const SearchTest = (color, ChangeBorder, SearchClick, searchRequest) => {
+  const wrapper = shallow(<Search color={color} ChangeBorder={ChangeBorder} SearchClick={SearchClick} searchRequest={searchRequest} />);
   return { wrapper };
 };
 // test for ratings
@@ -79,10 +81,9 @@ describe('<Ratings />', () => {
   });
 });
 
-//test for reviews
+// test for reviews
 
 describe('<Reviews />', () => {
-
   const ReviewData = [
     {
       ID: 83,
@@ -131,11 +132,43 @@ describe('<ReviewsEntry />', () => {
 });
 
 describe(' <Pagination />', () => {
-
   const totalReviews = 20;
   const reviewsPerPage = 10;
+  const paginate = () => {
+    console.log('made it');
+  };
 
-  const { wrapper } = PaginationTest(totalReviews, reviewsPerPage);
+  const { wrapper } = PaginationTest(totalReviews, reviewsPerPage, paginate);
 
-  it('should ')
-})
+  it('should have a page1', () => {
+    expect(wrapper.find('.page1').exists()).toBe(true);
+  });
+  it('should have a page2', () => {
+    expect(wrapper.find('.page2').exists()).toBe(true);
+  });
+});
+
+describe('<Search />', () => {
+  const color = 'red';
+  const ChangeBorder = () => {
+    console.log('change baorder func');
+  };
+  const SearchCLick = () => {
+    console.log('search click func');
+  };
+  const searchRequest = () => {
+    console.log(' search request func');
+  };
+
+  const { wrapper } = SearchTest(color, ChangeBorder, SearchCLick, searchRequest);
+
+  it('should have a color prop being passed in ', () => {
+    expect(wrapper.find('.color').exists()).toBe(true);
+  });
+  it('should have a color prop being passed in ', () => {
+    expect(wrapper.find('.searchRequest').exists()).toBe(true);
+  });
+  it('should have a color prop being passed in ', () => {
+    expect(wrapper.find('.changeBorder').exists()).toBe(true);
+  });
+});

@@ -34,6 +34,10 @@ border:none;
 &:focus {
   outline: 0;
 }
+&:hover {
+  text-decoration:underline;
+  text-decoration-color:teal;
+}
 `;
 
 const SearchedRatingsReplacement = ({ term, total, reset }) => (

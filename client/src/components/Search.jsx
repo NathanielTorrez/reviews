@@ -42,12 +42,12 @@ border:none;
 const Search = ({
   color, ChangeBorder, SearchClick, searchRequest,
 }) => (
-  <SearchContainer color={color}>
+  <SearchContainer className="color" color={color}>
     <ButtonContainer>
-      <SearchButton onClick={searchRequest}>&#128269;</SearchButton>
+      <SearchButton className="searchRequest" onClick={searchRequest}>&#128269;</SearchButton>
     </ButtonContainer>
     <SearchForm>
-      <SearchInput type="text" placeholder="Search Reviews" onClick={ChangeBorder} onChange={SearchClick} />
+      <SearchInput className="changeBorder" type="text" placeholder="Search Reviews" onClick={ChangeBorder} onChange={SearchClick} />
     </SearchForm>
   </SearchContainer>
 );

@@ -56,7 +56,7 @@ const Pagination = ({ totalReviews, Paginate, reviewsPerPage }) => {
         {pageNumbers.map((page) => (
           <ListItem key={page}>
             <PageButton type="button" onClick={Paginate}>
-              <Number>
+              <Number className={`page${page}`}>
                 {page}
               </Number>
             </PageButton>
