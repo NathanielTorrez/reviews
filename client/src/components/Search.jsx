@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+
 
 const SearchContainer = styled.div`
 margin-bottom:9px;
 width:187px;
 height:32px;
-border:${props => props.color};
+border-radius:2%;
+border:${(props) => props.color};
 `;
 const ButtonContainer = styled.div`
 display:block;
@@ -37,14 +39,24 @@ border:none;
 }
 `;
 
-const Search = ({ color, ChangeBorder, SearchClick, searchRequest }) => (
+const Search = ({
+  color, ChangeBorder, SearchClick, searchRequest,
+}) => (
   <SearchContainer color={color}>
     <ButtonContainer>
       <SearchButton onClick={searchRequest}>&#128269;</SearchButton>
     </ButtonContainer>
     <SearchForm>
-      <SearchInput type="text" placeholder="Search Reviews" onClick={ChangeBorder} onChange={SearchClick}></SearchInput>
+      <SearchInput type="text" placeholder="Search Reviews" onClick={ChangeBorder} onChange={SearchClick} />
     </SearchForm>
   </SearchContainer>
 );
+
+Search.propTypes = {
+  color: PropTypes.string.isRequired,
+  ChangeBorder: PropTypes.func.isRequired,
+  searchRequest: PropTypes.func.isRequired,
+  SearchClick: PropTypes.func.isRequired,
+};
+
 export default Search;

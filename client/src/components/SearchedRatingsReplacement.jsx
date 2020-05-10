@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ReplacementContainer = styled.div`
 display:flex;
@@ -35,11 +36,11 @@ border:none;
 }
 `;
 
-const SearchedRatingsReplacement = ({term, total, reset }) => (
+const SearchedRatingsReplacement = ({ term, total, reset }) => (
   <ReplacementContainer>
     <InnerContainer>
       <Textcontainer>
-      {`${total} guests have mentioned “${term}”`}
+        {`${total} guests have mentioned “${term}”`}
       </Textcontainer>
       <ButtonContainer onClick={reset}>
         back to reviews
@@ -47,4 +48,10 @@ const SearchedRatingsReplacement = ({term, total, reset }) => (
     </InnerContainer>
   </ReplacementContainer>
 );
+
+SearchedRatingsReplacement.propTypes = {
+  term: PropTypes.string.isRequired,
+  total: PropTypes.number.isRequired,
+  reset: PropTypes.func.isRequired,
+};
 export default SearchedRatingsReplacement;

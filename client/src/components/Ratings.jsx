@@ -1,5 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import RatingBar from './RatingBar.jsx';
 
 const RatingsConatainer = styled.div`
@@ -32,10 +35,10 @@ font-weight:600;
 
 const Ratings = ({ rating }) => (
   <RatingsConatainer>
-    <RatingItem>
-      <RatingName>Communication</RatingName>
-      <RatingScore>
-        <RatingBar percent={rating.communication * 20} />
+    <RatingItem className="RatingItem">
+      <RatingName className="RatingName">Communication</RatingName>
+      <RatingScore className="RatingScore">
+        <RatingBar className ="RatingBar" percent={rating.communication * 20} />
         {rating.communication}
       </RatingScore>
     </RatingItem>
@@ -76,4 +79,5 @@ const Ratings = ({ rating }) => (
     </RatingItem>
   </RatingsConatainer>
 );
+
 export default Ratings;

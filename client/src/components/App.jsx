@@ -111,6 +111,7 @@ class App extends React.Component {
         this.setState({
           reviews: results.data,
         });
+        console.log(results.data)
       })
       .catch((err) => {
         console.log(err);
@@ -166,7 +167,6 @@ class App extends React.Component {
     e.preventDefault();
     const term = e.target.value;
     const { searchTerm } = this.state;
-    const { searched } = this.state;
     if (term.length < searchTerm.length) {
       this.setState({
         searched: false,
@@ -177,11 +177,12 @@ class App extends React.Component {
         searchTerm: term,
       });
     }
-}
+  }
 
   SearchGetRequest(e) {
     e.preventDefault();
-    axios.get(`http://localhost:3003/search?id=2&term=${this.state.searchTerm}`)
+    const { searchTerm } = this.state;
+    axios.get(`http://localhost:3003/search?id=2&term=${searchTerm}`)
       .then((results) => {
         const { data } = results;
         this.setState({
@@ -228,14 +229,18 @@ class App extends React.Component {
     } else {
       if (searched) {
         ReviewComp = <Reviews reviews={currentSearchReview} />;
-        RatingComp = <SearchedRatingsReplacement total={searchResults.length} term={searchTerm} reset={this.Reset} />;
+        RatingComp = (
+          <SearchedRatingsReplacement
+            total={searchResults.length}
+            term={searchTerm}
+            reset={this.Reset}
+          />
+        );
         totalReviews = searchResults.length;
-
       } else {
         ReviewComp = <Reviews reviews={currentReview} />;
         RatingComp = <Ratings searched={searched} rating={ratings[0]} />;
         totalReviews = reviews.length;
-
       }
       overallRating = ratings[0].rating;
     }
@@ -248,12 +253,21 @@ class App extends React.Component {
             <HeaderRating>{overallRating}</HeaderRating>
             <TotalReviewsNumber>{totalReviews}</TotalReviewsNumber>
             <TotalReviews> Reviews</TotalReviews>
-            <Search color={searchButtonColor} ChangeBorder={this.ChangeBorder} SearchClick={this.SearchClick} searchRequest={this.SearchGetRequest} />
+            <Search
+              color={searchButtonColor}
+              ChangeBorder={this.ChangeBorder}
+              SearchClick={this.SearchClick}
+              searchRequest={this.SearchGetRequest}
+            />
           </BottomHeader>
         </Header>
         {RatingComp}
         <BodyContainer onClick={this.ChangeBorderOnBodyClick}>{ReviewComp}</BodyContainer>
-        <Pagination totalReviews={totalReviews} reviewsPerPage={reviewsPerPage} Paginate={this.paginate} />
+        <Pagination
+          totalReviews={totalReviews}
+          reviewsPerPage={reviewsPerPage}
+          Paginate={this.paginate}
+        />
       </ComponentContainer>
     );
   }

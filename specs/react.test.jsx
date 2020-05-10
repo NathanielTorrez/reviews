@@ -1,17 +1,141 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
+import styled from 'styled-components';
+import Pagination from '../client/src/components/Pagination.jsx';
+import RatingBar from '../client/src/components/RatingBar.jsx';
+import Ratings from '../client/src/components/Ratings.jsx';
+import ReviewEntry from '../client/src/components/ReviewEntry.jsx';
+import Reviews from '../client/src/components/Reviews.jsx';
+import Search from '../client/src/components/Search.jsx';
+import SearchedRatingsReplacement from '../client/src/components/SearchedRatingsReplacement.jsx';
+import App from '../client/src/components/App.jsx';
 
-function Fixture() {
-  return (
-    <div>
-      <input id="checked" defaultChecked />
-      <input id="not" defaultChecked={false} />
-      <input id="tertiary" defaultChecked checked={false} />
-    </div>
+
+const Ratingstest = (RatingsData) => {
+  const wrapper = shallow(<Ratings rating={RatingsData} />);
+  return { wrapper };
+};
+
+const ReviewTest = (reviews) => {
+  const wrapper = shallow(<Reviews reviews={reviews} />);
+  return { wrapper };
+};
+
+const ReviewEntryTest = (review) => {
+  const wrapper = shallow(<ReviewEntry
+    reviewText={review.review_text}
+    date={review.fullDate}
+    image={review.photo_url}
+    name={review._name}
+  />);
+  return { wrapper };
+};
+
+const PaginationTest = (totalReviews, reviewsPerPage) => {
+  const wrapper = shallow(
+    <Pagination
+      totalReviews={totalReviews}
+      reviewsPerPage={reviewsPerPage}
+    />
   );
-}
+  return { wrapper };
+};
 
-const wrapper = mount(<Fixture />); // mount/render/shallow when applicable
+const SearchTest = (term) => {
+  const wrapper = shallow(<Ratings rating={RatingsData} />);
+  return { wrapper };
+};
+// test for ratings
 
-expect(wrapper.find('#checked')).toBeChecked();
-expect(wrapper.find('#not')).not.toBeChecked();
+describe('<Ratings />', () => {
+  const RatingsData = {
+    ID: 2,
+    accuracy: 3.8,
+    cleanliness: 4,
+    communication: 'textTest',
+    home_id: 2,
+    rating: 3.3,
+    _checkin: 4.5,
+    _location: 1.2,
+    _value: 3.3,
+  };
+
+  const { wrapper } = Ratingstest(RatingsData);
+
+  it('should have class rating name ', () => {
+    expect(wrapper.find('.RatingName').exists()).toBe(true);
+  });
+  it('should have class rating item ', () => {
+    expect(wrapper.find('.RatingItem').exists()).toBe(true);
+  });
+  it('should have class rating score ', () => {
+    expect(wrapper.find('.RatingScore').exists()).toBe(true);
+  });
+  it('should have class rating bar ', () => {
+    expect(wrapper.find('.RatingBar').exists()).toBe(true);
+  });
+  it('should have class rating bar ', () => {
+    expect(wrapper.find('.RatingScore').text()).toEqual('<RatingBar />textTest');
+  });
+});
+
+//test for reviews
+
+describe('<Reviews />', () => {
+
+  const ReviewData = [
+    {
+      ID: 83,
+      review_text: 'The amenities was very much huge. I disliked this, I will be staying here again because of that .',
+      user: 83,
+      home_id: 2,
+      fullDate: 'November 2019',
+      host_response_id: 81,
+      _name: 'Talon Cunningham',
+      photo_url: 'https://photo-bucket-fex.s3.us-west-1.amazonaws.com/steve-halama-dfwFFQLvc0s-unsplash.jpg?AWSAccessKeyId=AKIAJ5Z6AO2XYHLQQQIQ&Expires=1589044861&Signature=kSWxTLR0L%2BY65UA%2BUm%2BhK%2BOeM3U%3D',
+    }];
+
+  const { wrapper } = ReviewTest(ReviewData);
+
+  it('Should Contain Review entry', () => {
+    expect(wrapper.find('.ReviewEntry').exists()).toBe(true);
+  });
+});
+
+
+// test for review entry
+describe('<ReviewsEntry />', () => {
+  const review = [
+    {
+      ID: 83,
+      review_text: 'The amenities was very much huge. I disliked this, I will be staying here again because of that .',
+      user: 83,
+      home_id: 2,
+      fullDate: 'November 2019',
+      host_response_id: 81,
+      _name: 'Talon Cunningham',
+      photo_url: 'https://photo-bucket-fex.s3.us-west-1.amazonaws.com/steve-halama-dfwFFQLvc0s-unsplash.jpg?AWSAccessKeyId=AKIAJ5Z6AO2XYHLQQQIQ&Expires=1589044861&Signature=kSWxTLR0L%2BY65UA%2BUm%2BhK%2BOeM3U%3D',
+    }];
+
+  const { wrapper } = ReviewEntryTest(review[0]);
+
+  it('Should display the review text', () => {
+    expect(wrapper.find('.Entry').text()).toEqual('The amenities was very much huge. I disliked this, I will be staying here again because of that .');
+  });
+  it('Should display the review text', () => {
+    expect(wrapper.find('.name').text()).toEqual('Talon Cunningham');
+  });
+  it('Should display the review text', () => {
+    expect(wrapper.find('.date').text()).toEqual('November 2019');
+  });
+});
+
+describe(' <Pagination />', () => {
+
+  const totalReviews = 20;
+  const reviewsPerPage = 10;
+
+  const { wrapper } = PaginationTest(totalReviews, reviewsPerPage);
+
+  it('should ')
+})

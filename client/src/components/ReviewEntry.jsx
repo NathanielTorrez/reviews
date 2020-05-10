@@ -49,16 +49,18 @@ const Date = styled.div`
   font-size:14px;
   font-weight:400px;
  `;
-const ReviewEntry = ({reviewText, date, name, image,}) => (
+const ReviewEntry = ({
+  reviewText, date, name, image,
+}) => (
   <ReviewContainer>
     <UserContainer>
       <ProfilePicture src={image} />
       <DetailsContainer>
-        <Name>{name}</Name>
-        <Date>{date}</Date>
+        <Name className="name">{name}</Name>
+        <Date className="date">{date}</Date>
       </DetailsContainer>
     </UserContainer>
-    <ReviewtextContainer>
+    <ReviewtextContainer className="Entry">
       {reviewText}
     </ReviewtextContainer>
   </ReviewContainer>
@@ -67,6 +69,8 @@ const ReviewEntry = ({reviewText, date, name, image,}) => (
 ReviewEntry.propTypes = {
   reviewText: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 };
 
 export default ReviewEntry;
