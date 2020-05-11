@@ -36,7 +36,34 @@ const seedUsers = () => {
       }
     });
   }
-  seedPhotos();
+  const urls = [
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/ben-parker-OhKElOkQ3RE-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/brooks-leibee-27QcqVqgVg4-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/cesar-rincon-XHVpWcr5grQ-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/chris-leggat-JAkWUtmsFXM-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/eddy-lackmann-lLdGG3ESoiI-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/freestocks-u49hkWzTL3w-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/iheb-ab-OBufvGMaBaQ-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/kirill-balobanov-2rIs8OH5ng0-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/lesly-juarez-RukI4qZGlQs-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/mateo-avila-chinchilla-x_8oJhYU31k-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/michael-dam-mEZ3PoFGs_k-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/morgan-aragon-BFyTdSthQDA-unsplash.jpg',
+    'https://photo-bucket-fex.s3-us-west-1.amazonaws.com/steve-halama-dfwFFQLvc0s-unsplash.jpg'
+  ];
+
+  for (let j = 1; j < 101; j += 1) {
+    const randomIndex = Math.floor(Math.random() * urls.length);
+    const url = urls[randomIndex];
+    db.query(`UPDATE users SET photo_url="${url}" WHERE ID=${j};`, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        //console.log('success');
+      }
+    });
+  }
+  //seedPhotos()
 };
 
 const seedRatings = () => {

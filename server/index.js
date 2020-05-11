@@ -175,4 +175,16 @@ app.get('/total', (req, res) => {
   });
 });
 
+app.get('/photos', (req, res) => {
+  db.query(`select photo_url from users`, (err, results) => {
+    if (err) {
+      res.status(404);
+      res.send(err);
+    } else {
+      res.status(200);
+      res.send(results);
+    }
+  });
+});
+
 app.listen(port, () => { console.log(`listening on port ${port}`); });
