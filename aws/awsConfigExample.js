@@ -1,7 +1,7 @@
 // module.exports = {
 //   credentials: {
-//     accessKeyId: '',
-//     secretAccessKey: '',
-//     region: '',
+//     accessKeyId: 'Your access key',
+//     secretAccessKey: 'Your secret access key',
+//     region: 'Your region',
 //   },
 // };

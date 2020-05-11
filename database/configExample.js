@@ -1,9 +1,7 @@
-
 // const login = {
-//   host: '',
-//   user: '',
-//   password: '',
-//   database: ''
+//   host: 'localhost',
+//   user: 'YOUR_USERNAME',
+//   password: 'YOUR_PASSWORD',
+//   database: 'review'
 // };
-
-//module.exports = login;
+// module.exports = login;
