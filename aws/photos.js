@@ -26,6 +26,7 @@ const seedPhotoUrl = () => {
         // });
         // keys.push(presignedGETURL);
       }
+      console.log(urls)
       for (let j = 1; j < 101; j += 1) {
         const randomIndex = Math.floor(Math.random() * urls.length);
         const url = urls[randomIndex];
