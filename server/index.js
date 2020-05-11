@@ -150,4 +150,29 @@ app.get('/search', (req, res) => {
   });
 });
 
+app.get('/total', (req, res) => {
+  const { id } = req.query;
+
+  db.query(`select review_text from reviews where home_id=${id}`, (err, results) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const review = results.length;
+      db.query(`select rating from ratings where home_id=${id}`, (err, ratingObj) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.status(200);
+          const { rating } = ratingObj[0];
+          const allResults = {
+            overallRating: rating,
+            totalReview: review,
+          };
+          res.send(allResults);
+        }
+      });
+    }
+  });
+});
+
 app.listen(port, () => { console.log(`listening on port ${port}`); });
