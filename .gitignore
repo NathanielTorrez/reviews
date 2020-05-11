@@ -1,0 +1,11 @@
+config.js
+
+node_modules
+
+package-lock.json
+
+bundle.js
+
+client/dist/bundle.js
+
+awsconfig.js
