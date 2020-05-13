@@ -20,7 +20,7 @@ const ComponentContainer = styled.div`
   background-color:#fff;
   padding-left:150px;
   width:648px;
-  height:2285px;
+  height:1650px;
   font-family: 'Montserrat', sans-serif;
 `;
 
@@ -106,7 +106,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3003/reviews?id=2')
+    const rand = Math.floor(Math.random() * 101)
+    axios.get(`http://localhost:3003/reviews?id=${rand}`)
       .then((results) => {
         this.setState({
           reviews: results.data,
@@ -117,7 +118,7 @@ class App extends React.Component {
         console.log(err);
       });
 
-    axios.get('http://localhost:3003/ratings?id=2')
+    axios.get(`http://localhost:3003/ratings?id=${rand}`)
       .then((results) => {
         this.setState({
           ratings: results.data,
