@@ -107,7 +107,7 @@ class App extends React.Component {
 
   componentDidMount() {
     const rand = Math.floor(Math.random() * 101)
-    axios.get(`http://localhost:3003/reviews?id=${rand}`)
+    axios.get(`http://50.18.227.14:3003/reviews?id=${rand}`)
       .then((results) => {
         this.setState({
           reviews: results.data,
@@ -118,7 +118,7 @@ class App extends React.Component {
         console.log(err);
       });
 
-    axios.get(`http://localhost:3003/ratings?id=${rand}`)
+    axios.get(`http://50.18.227.14:3003/ratings?id=${rand}`)
       .then((results) => {
         this.setState({
           ratings: results.data,

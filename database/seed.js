@@ -25,6 +25,7 @@ const seedUsers = () => {
     'Devin reuschel',
     'Spencer Ng'];
 
+
   for (let i = 0; i < 100; i += 1) {
     const randomIndex = Math.floor(Math.random() * 20);
     const name = names[randomIndex];
