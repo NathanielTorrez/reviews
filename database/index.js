@@ -1,21 +1,11 @@
 const mySql = require('mysql');
+const { login , login2 } = require('./config.js')
 
-const connection = mySql.createConnection({
-  host: '172.17.0.2',
-  user: 'root',
-  password: 'May291998',
-  database: 'review',
-});
+const connection = mySql.createConnection(login);
 
 connection.connect((err) => {
   if (err) {
-    mySql.createConnection({
-      host: '172.17.0.3',
-      user: 'root',
-      password: 'May291998',
-      database: 'review',
-    });
-
+    mySql.createConnection(login2);
   } else {
     console.log('connected');
   }

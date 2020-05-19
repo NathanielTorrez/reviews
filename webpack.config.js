@@ -1,5 +1,7 @@
 /* eslint-disable no-path-concat */
 const path = require('path');
+const CompressionPlugin = require('compression-webpack-plugin');
+
 
 module.exports = {
   entry: `${__dirname}/client/src/index.jsx`,
@@ -25,4 +27,7 @@ module.exports = {
     extensions: ['.js', '.json', '.jsx'],
     alias: { react: path.resolve('./node_modules/react') }
   },
+  plugins: [new CompressionPlugin({
+    test: /\.js(\?.*)?$/i,
+  })],
 };
