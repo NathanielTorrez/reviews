@@ -11,4 +11,4 @@ Step 3. ensure your database is up and running, use review for the database
 
 Step 4. Seed the database using npm run seed
 
-![interface picture](./Desktop/rentsyPic "Title")
+![interface picture](./Users/nathanieltorrez/Desktop/rentsyPic "Title")
